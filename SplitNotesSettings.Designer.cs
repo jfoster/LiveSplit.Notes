@@ -1,4 +1,4 @@
-﻿namespace LiveSplit.SplitNotes
+namespace LiveSplit.SplitNotes
 {
     partial class SplitNotesSettings
     {
@@ -85,7 +85,6 @@
             0,
             0,
             0});
-            this.sizeUpDown.ValueChanged += new System.EventHandler(this.sizeUpDown_ValueChanged);
             // 
             // SplitNotesSettings
             // 

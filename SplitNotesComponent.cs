@@ -1,4 +1,4 @@
-﻿using LiveSplit.Model;
+using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
 using System;
@@ -98,16 +98,16 @@ namespace LiveSplit.SplitNotes
 
         public string ComponentName => "Split Notes";
 
-        public float HorizontalWidth => Settings.ComponentSize;
-        public float VerticalHeight => Settings.ComponentSize;
+        public float HorizontalWidth => Settings.ComponentSize == 0 ? 128f : Settings.ComponentSize;
+        public float VerticalHeight => Settings.ComponentSize == 0 ? 128f : Settings.ComponentSize;
 
         public float MinimumHeight => 16f;
         public float MinimumWidth => 16f;
 
-        public float PaddingBottom => 7f;
-        public float PaddingLeft => 7f;
-        public float PaddingRight => 7f;
-        public float PaddingTop => 7f;
+        public float PaddingBottom => 8f;
+        public float PaddingLeft => 8f;
+        public float PaddingRight => 8f;
+        public float PaddingTop => 8f;
 
         public IDictionary<string, Action> ContextMenuControls => null;
 
@@ -141,7 +141,6 @@ namespace LiveSplit.SplitNotes
 
         public Control GetSettingsControl(LayoutMode mode)
         {
-            Settings.mode = mode;
             return Settings;
         }
 

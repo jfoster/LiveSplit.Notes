@@ -1,4 +1,4 @@
-﻿using LiveSplit.Model;
+using LiveSplit.Model;
 using LiveSplit.SplitNotes;
 using LiveSplit.UI.Components;
 using System;
