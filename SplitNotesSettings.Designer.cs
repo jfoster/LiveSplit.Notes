@@ -2,12 +2,12 @@ namespace LiveSplit.SplitNotes
 {
     partial class SplitNotesSettings
     {
-        /// <summary> 
+        /// <summary>
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -22,8 +22,8 @@ namespace LiveSplit.SplitNotes
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -34,9 +34,9 @@ namespace LiveSplit.SplitNotes
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sizeUpDown)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // tableLayoutPanel1
-            // 
+            //
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
@@ -50,9 +50,9 @@ namespace LiveSplit.SplitNotes
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(494, 22);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
+            //
             // sizeLabel
-            // 
+            //
             this.sizeLabel.AutoSize = true;
             this.sizeLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sizeLabel.Location = new System.Drawing.Point(3, 0);
@@ -61,9 +61,9 @@ namespace LiveSplit.SplitNotes
             this.sizeLabel.TabIndex = 0;
             this.sizeLabel.Text = "Size";
             this.sizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
+            //
             // sizeUpDown
-            // 
+            //
             this.sizeUpDown.AutoSize = true;
             this.sizeUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sizeUpDown.Location = new System.Drawing.Point(52, 3);
@@ -85,9 +85,9 @@ namespace LiveSplit.SplitNotes
             0,
             0,
             0});
-            // 
+            //
             // SplitNotesSettings
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
