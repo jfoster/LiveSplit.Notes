@@ -1,15 +1,14 @@
-﻿using System.Drawing;
+using System.Drawing;
 
 namespace LiveSplit.SplitNotes
 {
     class SplitNote
     {
-        public string Name { get; set; }
         public string[] Text { get; set; }
 
-        public SplitNote()
+        public SplitNote(string[] text)
         {
-
+            Text = text;
         }
 
         public void Draw(Graphics g, SizeF s, Font f, Color c)

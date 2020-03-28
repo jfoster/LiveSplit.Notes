@@ -17,9 +17,9 @@ namespace LiveSplit.SplitNotes
     {
         protected SplitNotesSettings Settings { get; set; }
 
-        protected List<SplitNote> Notes { get; set; }
+        protected Dictionary<string, string[]> Notes { get; set; }
 
-        protected SplitNote CurrentNote;
+        protected SplitNote CurrentNote { get; set; }
 
         public SplitNotesComponent(LiveSplitState state)
         {
@@ -59,11 +59,11 @@ namespace LiveSplit.SplitNotes
         {
             if (Notes.Count > 0 && state.CurrentSplit != null)
             {
-                CurrentNote = Notes.FirstOrDefault(f => f.Name == state.CurrentSplit.Name);
+                CurrentNote = new SplitNote(Notes[state.CurrentSplit.Name]);
             }
         }
 
-        private List<SplitNote> GetNotes(LiveSplitState state)
+        private Dictionary<string, string[]> GetNotes(LiveSplitState state)
         {
             var filename = new Regex(@"(.+)\.\w+$").Replace(state.Run.FilePath, "$1.yml");
 
@@ -72,19 +72,15 @@ namespace LiveSplit.SplitNotes
                 using (StreamReader reader = File.OpenText(filename))
                 {
                     var ds = new DeserializerBuilder().Build();
-                    return ds.Deserialize<List<SplitNote>>(reader);
+                    return ds.Deserialize<Dictionary<string, string[]>>(reader);
                 }
             }
 
-            var notes = new List<SplitNote>();
+            var notes = new Dictionary<string, string[]>();
 
             foreach (var segment in state.Run)
             {
-                notes.Add(new SplitNote
-                {
-                    Name = segment.Name,
-                    Text = new string[] { "example" }
-                });
+                notes.Add(segment.Name, new string[] { "example" });
             }
 
             using (StreamWriter writer = new StreamWriter(filename))
