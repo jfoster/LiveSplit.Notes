@@ -4,8 +4,8 @@ using LiveSplit.UI.Components;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
@@ -15,31 +15,38 @@ namespace LiveSplit.SplitNotes
 {
     class SplitNotesComponent : IComponent
     {
-        protected SplitNotesSettings Settings { get; set; }
+        private readonly IComponentFactory Factory;
 
-        protected Dictionary<string, string[]> Notes { get; set; }
+        private readonly SplitNotesSettings Settings;
 
-        protected SplitNote CurrentNote { get; set; }
+        private Dictionary<string, SplitNote> Notes;
 
-        public SplitNotesComponent(LiveSplitState state)
+        private SplitNote CurrentNote;
+
+        public SplitNotesComponent(IComponentFactory factory, LiveSplitState state)
         {
+            Factory = factory;
             Settings = new SplitNotesSettings();
 
             // Creates notes file if it doesn't exit
-            Notes = GetNotes(state);
+            Notes = GetNotes((Run)state.Run);
+            CurrentNote = new SplitNote("", ComponentName);
 
-            state.OnStart += DoStart;
-            state.OnSplit += DoSplit;
-            state.OnUndoSplit += DoSplit;
-            state.OnReset += DoReset;
             state.RunManuallyModified += DoStart;
+            state.OnStart += DoStart;
+
+            state.OnSplit += DoSplit;
+            state.OnSkipSplit += DoSplit;
+            state.OnUndoSplit += DoSplit;
+
+            state.OnReset += DoReset;
         }
 
         private void DoStart(object sender, EventArgs e)
         {
             LiveSplitState state = (LiveSplitState)sender;
             // Re-read notes file on starting run
-            Notes = GetNotes(state);
+            Notes = GetNotes((Run)state.Run);
             Do(state);
         }
 
@@ -52,47 +59,62 @@ namespace LiveSplit.SplitNotes
         private void DoReset(object sender, TimerPhase value)
         {
             LiveSplitState state = (LiveSplitState)sender;
-            Do(state);
+            CurrentNote = new SplitNote("", ComponentName);
         }
 
         private void Do(LiveSplitState state)
         {
-            if (Notes.Count > 0 && state.CurrentSplit != null)
+            if (state.CurrentSplit != null && Notes != null && Notes.Count > 0)
             {
-                CurrentNote = new SplitNote(Notes[state.CurrentSplit.Name]);
+                var key = state.CurrentSplit.Name;
+                CurrentNote = Notes[key];
             }
         }
 
-        private Dictionary<string, string[]> GetNotes(LiveSplitState state)
+        private Dictionary<string, SplitNote> GetNotes(Run run)
         {
-            var filename = new Regex(@"(.+)\.\w+$").Replace(state.Run.FilePath, "$1.yml");
+            Dictionary<string, string[]> yaml = null;
+
+            if (run.GameName is "")
+            {
+                return null;
+            }
+
+            var filename = new Regex(@"(.+)\.\w+$").Replace(run.FilePath, "$1.yml");
 
             if (File.Exists(filename))
             {
                 using (StreamReader reader = File.OpenText(filename))
                 {
                     var ds = new DeserializerBuilder().Build();
-                    return ds.Deserialize<Dictionary<string, string[]>>(reader);
+                    yaml = ds.Deserialize<Dictionary<string, string[]>>(reader);
                 }
             }
 
-            var notes = new Dictionary<string, string[]>();
-
-            foreach (var segment in state.Run)
+            if (yaml is null)
             {
-                notes.Add(segment.Name, new string[] { "example" });
+                yaml = new Dictionary<string, string[]>();
+            }
+
+            foreach (var segment in run)
+            {
+                var key = segment.Name;
+                if (!yaml.ContainsKey(key))
+                {
+                    yaml.Add(segment.Name, new string[] { "example", "text" });
+                }
             }
 
             using (StreamWriter writer = new StreamWriter(filename))
             {
                 var s = new SerializerBuilder().Build();
-                s.Serialize(writer, notes);
+                s.Serialize(writer, yaml);
             }
 
-            return notes;
+            return yaml.ToDictionary(kvp => kvp.Key, kvp => new SplitNote(kvp.Key, kvp.Value)); ;
         }
 
-        public string ComponentName => "Split Notes";
+        public string ComponentName => Factory.ComponentName;
 
         public float HorizontalWidth => Settings.ComponentSize == 0 ? 128f : Settings.ComponentSize;
         public float VerticalHeight => Settings.ComponentSize == 0 ? 128f : Settings.ComponentSize;
@@ -109,13 +131,10 @@ namespace LiveSplit.SplitNotes
 
         private void Draw(Graphics g, LiveSplitState state, float width, float height, Region clipRegion)
         {
-            if (state.CurrentPhase != TimerPhase.NotRunning)
+            if (CurrentNote != null)
             {
-                if (CurrentNote != null)
-                {
-                    SizeF s = new SizeF(width, height);
-                    CurrentNote.Draw(g, s, state.LayoutSettings.TextFont, state.LayoutSettings.TextColor);
-                }
+                SizeF s = new SizeF(width, height);
+                CurrentNote.Draw(g, s, state.LayoutSettings.TextFont, state.LayoutSettings.TextColor);
             }
         }
 

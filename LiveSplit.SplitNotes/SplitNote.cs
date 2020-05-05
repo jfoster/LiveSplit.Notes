@@ -4,22 +4,37 @@ namespace LiveSplit.SplitNotes
 {
     class SplitNote
     {
-        public string[] Text { get; set; }
+        public string Name { get; set; }
+        public string Text { get; set; }
 
-        public SplitNote(string[] text)
+        public SplitNote(string name, string[] text)
         {
+            Name = name;
+
+            if (text is null)
+            {
+                Text = "";
+            }
+            else if (text.Length > 1)
+            {
+                Text = string.Join("\n", text);
+            }
+            else if (text.Length == 1)
+            {
+                Text = text[0];
+            }
+        }
+
+        public SplitNote(string name, string text)
+        {
+            Name = name;
             Text = text;
         }
 
         public void Draw(Graphics g, SizeF s, Font f, Color c)
         {
-            var splitText = "";
-            if (Text != null && Text.Length > 0)
-            {
-                splitText = string.Join("\n", Text);
-            }
-            var font = AdjustedFont(g, splitText, f, s, f.SizeInPoints, 5);
-            g.DrawString(splitText, font, new SolidBrush(c), new RectangleF(new PointF(0, 0), s), new StringFormat());
+            var font = AdjustedFont(g, Text, f, s, f.SizeInPoints, 5);
+            g.DrawString(Text, font, new SolidBrush(c), new RectangleF(new PointF(0, 0), s), new StringFormat());
         }
 
         public Font AdjustedFont(Graphics g, string s, Font f, SizeF cs, float maxFontSize, float minFontSize)

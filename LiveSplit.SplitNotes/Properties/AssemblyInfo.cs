@@ -1,6 +1,7 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using GitInfo;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
@@ -8,11 +9,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LiveSplit.SplitNotes")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("jfoster")]
 [assembly: AssemblyProduct("LiveSplit.SplitNotes")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © jfoster 2020")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
+[assembly: AssemblyCulture("en")]
+[assembly: NeutralResourcesLanguage("en")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
@@ -32,5 +34,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion(GitVersion.Long)]
+[assembly: AssemblyFileVersion(GitVersion.Long)]
+[assembly: AssemblyInformationalVersion(GitVersion.Verbose)]
