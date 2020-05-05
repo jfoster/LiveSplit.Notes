@@ -6,7 +6,7 @@ namespace GitInfo
     {
         public const string Short = ThisAssembly.Git.BaseVersion.Major + "." + ThisAssembly.Git.BaseVersion.Minor + "." + ThisAssembly.Git.BaseVersion.Patch;
         public const string Long = Short + "." + ThisAssembly.Git.Commits;
-        public const string Verbose = ThisAssembly.Git.BaseTag + "-" + ThisAssembly.Git.Branch + "-g" + ThisAssembly.Git.Commit;
+        public const string Verbose = ThisAssembly.Git.BaseTag + "-g" + ThisAssembly.Git.Commit;
 
         public static class SemVer
         {
