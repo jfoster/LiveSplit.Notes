@@ -1,3 +1,4 @@
+using GraphicsExtensions;
 using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
@@ -22,6 +23,7 @@ namespace LiveSplit.SplitNotes
         private Dictionary<string, SplitNote> Notes;
 
         private SplitNote CurrentNote;
+        private SimpleLabel Label;
 
         public SplitNotesComponent(IComponentFactory factory, LiveSplitState state)
         {
@@ -31,6 +33,7 @@ namespace LiveSplit.SplitNotes
             // Creates notes file if it doesn't exit
             Notes = GetNotes((Run)state.Run);
             CurrentNote = new SplitNote("", ComponentName);
+            Label = new SimpleLabel();
 
             state.RunManuallyModified += DoStart;
             state.OnStart += DoStart;
@@ -131,10 +134,22 @@ namespace LiveSplit.SplitNotes
 
         private void Draw(Graphics g, LiveSplitState state, float width, float height, Region clipRegion)
         {
+            Label.Width = width;
+            Label.Height = height;
+
+            Label.Font = state.LayoutSettings.TextFont;
+            Label.ForeColor = state.LayoutSettings.TextColor;
+            Label.ShadowColor = state.LayoutSettings.ShadowsColor;
+            Label.OutlineColor = state.LayoutSettings.TextOutlineColor;
+            Label.HasShadow = state.LayoutSettings.DropShadows;
+
             if (CurrentNote != null)
             {
-                SizeF s = new SizeF(width, height);
-                CurrentNote.Draw(g, s, state.LayoutSettings.TextFont, state.LayoutSettings.TextColor);
+                Label.Text = CurrentNote.Text;
+
+                Label.Font = g.AdjustFontSize(Label.Font, 5, Label.Font.SizeInPoints, Label.Text, width, height);
+
+                Label.Draw(g);
             }
         }
 

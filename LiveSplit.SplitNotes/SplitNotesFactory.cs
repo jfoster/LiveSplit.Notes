@@ -10,7 +10,7 @@ namespace LiveSplit.SplitNotes
 {
     class SplitNotesFactory : IComponentFactory
     {
-        public string ComponentName => "LiveSplit.SplitNotes";
+        public string ComponentName => "SplitNotes";
 
         public string Description => "Notes for current split";
 
