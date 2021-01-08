@@ -10,15 +10,15 @@ using System.Windows.Forms;
 using System.Xml;
 using LiveSplit.UI;
 
-namespace LiveSplit.SplitNotes
+namespace LiveSplit.Notes
 {
-    public partial class SplitNotesSettings : UserControl
+    public partial class NotesSettings : UserControl
     {
         public float ComponentSize { get; set; }
 
         public event EventHandler SettingChanged;
 
-        public SplitNotesSettings()
+        public NotesSettings()
         {
             InitializeComponent();
 

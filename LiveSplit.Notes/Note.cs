@@ -1,14 +1,14 @@
 using System.Drawing;
 using GraphicsExtensions;
 
-namespace LiveSplit.SplitNotes
+namespace LiveSplit.Notes
 {
-    class SplitNote
+    class Note
     {
         public string Name { get; set; }
         public string Text { get; set; }
 
-        public SplitNote(string name, string[] text)
+        public Note(string name, string[] text)
         {
             Name = name;
 
@@ -26,7 +26,7 @@ namespace LiveSplit.SplitNotes
             }
         }
 
-        public SplitNote(string name, string text)
+        public Note(string name, string text)
         {
             Name = name;
             Text = text;

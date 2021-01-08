@@ -1,16 +1,16 @@
 using GitInfo;
 using LiveSplit.Model;
-using LiveSplit.SplitNotes;
+using LiveSplit.Notes;
 using LiveSplit.UI.Components;
 using System;
 
-[assembly: ComponentFactory(typeof(SplitNotesFactory))]
+[assembly: ComponentFactory(typeof(NotesFactory))]
 
-namespace LiveSplit.SplitNotes
+namespace LiveSplit.Notes
 {
-    class SplitNotesFactory : IComponentFactory
+    class NotesFactory : IComponentFactory
     {
-        public string ComponentName => "SplitNotes";
+        public string ComponentName => "Notes";
 
         public string Description => "Notes for current split";
 
@@ -24,6 +24,6 @@ namespace LiveSplit.SplitNotes
 
         public Version Version => GitVersion.Short.ToVersion();
 
-        public IComponent Create(LiveSplitState state) => new SplitNotesComponent(this, state);
+        public IComponent Create(LiveSplitState state) => new NotesComponent(this, state);
     }
 }

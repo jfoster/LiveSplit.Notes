@@ -9,8 +9,8 @@
     <ProjectGuid>{526F61AE-0BB6-478A-ABCD-E0628B65CA83}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LiveSplit.SplitNotes</RootNamespace>
-    <AssemblyName>LiveSplit.SplitNotes</AssemblyName>
+    <RootNamespace>LiveSplit.Notes</RootNamespace>
+    <AssemblyName>LiveSplit.Notes</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -63,19 +63,13 @@
     <Compile Include="GraphicsExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplitNote.cs" />
-    <Compile Include="SplitNotesComponent.cs" />
-    <Compile Include="SplitNoteSettings.cs">
+    <Compile Include="NotesComponent.cs" />
+    <Compile Include="NotesFactory.cs" />
+    <Compile Include="NotesSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SplitNoteSettings.Designer.cs">
-      <DependentUpon>SplitNoteSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SplitNotesFactory.cs" />
-    <Compile Include="SplitNotesSettings.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="SplitNotesSettings.Designer.cs">
-      <DependentUpon>SplitNotesSettings.cs</DependentUpon>
+    <Compile Include="NotesSettings.Designer.cs">
+      <DependentUpon>NotesSettings.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +77,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SplitNotesSettings.resx">
-      <DependentUpon>SplitNotesSettings.cs</DependentUpon>
+    <EmbeddedResource Include="NotesSettings.resx">
+      <DependentUpon>NotesSettings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -6,11 +6,11 @@ using GitInfo;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LiveSplit.SplitNotes")]
+[assembly: AssemblyTitle("LiveSplit.Notes")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("jfoster")]
-[assembly: AssemblyProduct("LiveSplit.SplitNotes")]
+[assembly: AssemblyProduct("LiveSplit.Notes")]
 [assembly: AssemblyCopyright("Copyright © jfoster 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("en")]

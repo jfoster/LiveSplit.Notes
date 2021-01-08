@@ -1,6 +1,6 @@
-﻿namespace LiveSplit.SplitNotes
+﻿namespace LiveSplit.Notes
 {
-    partial class SplitNotesSettings
+    partial class NotesSettings
     {
         /// <summary> 
         /// Required designer variable.
@@ -54,12 +54,12 @@
             0,
             0});
             // 
-            // SplitNotesSettings
+            // NotesSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.sizeUpDown);
-            this.Name = "SplitNotesSettings";
+            this.Name = "NotesSettings";
             this.Size = new System.Drawing.Size(852, 571);
             ((System.ComponentModel.ISupportInitialize)(this.sizeUpDown)).EndInit();
             this.ResumeLayout(false);

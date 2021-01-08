@@ -12,23 +12,23 @@ using System.Windows.Forms;
 using System.Xml;
 using YamlDotNet.Serialization;
 
-namespace LiveSplit.SplitNotes
+namespace LiveSplit.Notes
 {
-    class SplitNotesComponent : IComponent
+    class NotesComponent : IComponent
     {
         private readonly IComponentFactory Factory;
 
-        private readonly SplitNotesSettings Settings;
+        private readonly NotesSettings Settings;
 
         private Dictionary<string, SplitNote> Notes;
 
         private SplitNote CurrentNote;
         private SimpleLabel Label;
 
-        public SplitNotesComponent(IComponentFactory factory, LiveSplitState state)
+        public NotesComponent(IComponentFactory factory, LiveSplitState state)
         {
             Factory = factory;
-            Settings = new SplitNotesSettings();
+            Settings = new NotesSettings();
 
             // Creates notes file if it doesn't exit
             Notes = GetNotes((Run)state.Run);
