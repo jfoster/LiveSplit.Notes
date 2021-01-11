@@ -20,9 +20,9 @@ namespace LiveSplit.Notes
 
         private readonly NotesSettings Settings;
 
-        private Dictionary<string, SplitNote> Notes;
+        private Dictionary<string, Note> Notes;
 
-        private SplitNote CurrentNote;
+        private Note CurrentNote;
         private SimpleLabel Label;
 
         public NotesComponent(IComponentFactory factory, LiveSplitState state)
@@ -32,7 +32,7 @@ namespace LiveSplit.Notes
 
             // Creates notes file if it doesn't exit
             Notes = GetNotes((Run)state.Run);
-            CurrentNote = new SplitNote("", ComponentName);
+            CurrentNote = new Note("", ComponentName);
             Label = new SimpleLabel();
 
             state.RunManuallyModified += DoStart;
@@ -62,7 +62,7 @@ namespace LiveSplit.Notes
         private void DoReset(object sender, TimerPhase value)
         {
             LiveSplitState state = (LiveSplitState)sender;
-            CurrentNote = new SplitNote("", ComponentName);
+            CurrentNote = new Note("", ComponentName);
         }
 
         private void Do(LiveSplitState state)
@@ -74,7 +74,7 @@ namespace LiveSplit.Notes
             }
         }
 
-        private Dictionary<string, SplitNote> GetNotes(Run run)
+        private Dictionary<string, Note> GetNotes(Run run)
         {
             Dictionary<string, string[]> yaml = null;
 
@@ -114,7 +114,7 @@ namespace LiveSplit.Notes
                 s.Serialize(writer, yaml);
             }
 
-            return yaml.ToDictionary(kvp => kvp.Key, kvp => new SplitNote(kvp.Key, kvp.Value)); ;
+            return yaml.ToDictionary(kvp => kvp.Key, kvp => new Note(kvp.Key, kvp.Value)); ;
         }
 
         public string ComponentName => Factory.ComponentName;
